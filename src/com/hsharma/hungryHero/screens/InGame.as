@@ -42,6 +42,9 @@ package com.hsharma.hungryHero.screens
 	import starling.utils.deg2rad;
 	import starling.utils.rad2deg;
 	
+	import taptabcontroller.controller.vo.AbstractVO;
+	import taptabcontroller.controller.vo.GesturePadTouchVO;
+	
 	/**
 	 * This class contains the complete code of the game mechanics.
 	 *  
@@ -389,6 +392,7 @@ package com.hsharma.hungryHero.screens
 				tween_gameOverContainer.fadeTo(0);
 				tween_gameOverContainer.onComplete = gameOverFadedOut;
 				Starling.juggler.add(tween_gameOverContainer);
+				this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "playAgain"}, true));
 			}
 		}
 		
@@ -649,6 +653,9 @@ package com.hsharma.hungryHero.screens
 			
 			// Launch hero.
 			launchHero();
+			
+			// dispatch navigation event
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "start"}, true));
 		}
 		
 		/**
@@ -1526,6 +1533,8 @@ package com.hsharma.hungryHero.screens
 			tween_gameOverContainer = new Tween(gameOverContainer, 1);
 			tween_gameOverContainer.fadeTo(1);
 			Starling.juggler.add(tween_gameOverContainer);
+			
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "lose"}, true));
 		}
 		
 		private function shakeAnimation(event:Event):void
@@ -1680,6 +1689,41 @@ package com.hsharma.hungryHero.screens
 			
 			// Calcualte the time it takes for a frame to pass, in milliseconds.
 			elapsed = (timeCurrent - timePrevious) * 0.001; 
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function onTapTabControllerControlChange(__vo:AbstractVO):void
+		{
+			switch (__vo.controlId)
+			{
+				case "bt_START":
+					onStartButtonClick(null);
+					break;
+				case "bt_MAIN":
+					gameOverContainer.mainBtn.dispatchEvent(new Event(Event.TRIGGERED, true));
+					break;
+				case "bt_PLAYAGAIN":
+					gameOverContainer.playAgainBtn.dispatchEvent(new Event(Event.TRIGGERED, true));
+					break;
+				case "bt_ABOUT":
+					gameOverContainer.aboutBtn.dispatchEvent(new Event(Event.TRIGGERED, true));
+					break;
+				case "gesturePad":
+					if(__vo is GesturePadTouchVO)
+					{
+						var gestureVO : GesturePadTouchVO = __vo as GesturePadTouchVO; 
+						touchY = stage.stageHeight / 2 + gestureVO.locationY * (stage.stageHeight / 2);
+					}
+					
+					break;
+			}
 		}
 	}
 }

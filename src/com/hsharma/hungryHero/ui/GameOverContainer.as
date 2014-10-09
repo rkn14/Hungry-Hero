@@ -41,13 +41,13 @@ package com.hsharma.hungryHero.ui
 		private var scoreText:TextField;
 		
 		/** Play again button. */
-		private var playAgainBtn:Button;
+		public var playAgainBtn:Button;
 		
 		/** Main Menu button. */
-		private var mainBtn:Button;
+		public var mainBtn:Button;
 		
 		/** About button. */
-		private var aboutBtn:Button;
+		public var aboutBtn:Button;
 		
 		/** Font - score display. */
 		private var fontScore:Font;

@@ -32,6 +32,8 @@ package com.hsharma.hungryHero.screens
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
 	
+	import taptabcontroller.controller.vo.AbstractVO;
+	
 	/**
 	 * This is the welcome or main menu class for the game.
 	 *  
@@ -177,7 +179,7 @@ package com.hsharma.hungryHero.screens
 		private function onAboutBackClick(event:Event):void
 		{
 			if (!Sounds.muted) Sounds.sndCoffee.play();
-			
+			dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "welcome"}, true));
 			initialize();
 		}
 		
@@ -220,6 +222,8 @@ package com.hsharma.hungryHero.screens
 		 */
 		private function onAboutClick(event:Event):void
 		{
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "about"}, true));
+			
 			if (!Sounds.muted) Sounds.sndMushroom.play();
 			showAbout();
 		}
@@ -303,6 +307,30 @@ package com.hsharma.hungryHero.screens
 			if (this.hasEventListener(Event.ENTER_FRAME)) this.removeEventListener(Event.ENTER_FRAME, floatingAnimation);
 			
 			if (screenMode != "about") SoundMixer.stopAll();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function onTapTabControllerControlChange(__vo:AbstractVO):void
+		{
+			switch (__vo.controlId)
+			{
+				case "bt_PLAY":
+					onPlayClick(null);
+					break;
+				case "bt_ABOUT":
+					onAboutClick(null);
+					break;
+				case "bt_BACK":
+					onAboutBackClick(null);
+					break;
+			}
 		}
 	}
 }

@@ -171,6 +171,7 @@ package com.hsharma.hungryHero.ui
 		{
 			_foodScore = value;
 			foodScoreText.text = _foodScore.toString();
+			dispatchEvent(new Event("score", true, {score:_foodScore}));
 		}
 		
 		/**
