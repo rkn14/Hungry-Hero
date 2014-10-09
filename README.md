@@ -1,5 +1,8 @@
-Hungry Hero Game
+Hungry Hero Game - TapTab Controller version
 ================
+
+This fork make the Hungry Hero game playable with the TapTab Controller application.
+You can test it on the [TapTab Controller website](http://taptab-controller.com/hungry-hero-taptab-version/).
 
 
 Usage
