@@ -145,7 +145,7 @@ package
 			switch (event.type)
 			{
 				case TapTabControllersManagerEvent.NEW_TAPTABCONTROLLER:
-					event.taptabController.addEventListener(TapTabControllerEvent.BOUND, _handler_TapTabController);
+					_initTapTabController(event.taptabController);
 					break;
 			}
 		}
@@ -154,9 +154,6 @@ package
 		{
 			switch (event.type)
 			{
-				case TapTabControllerEvent.BOUND:
-					_initTapTabController(event.currentTarget as TapTabController);
-					break;
 				case TapTabControllerEvent.CONTROL_CHANGE:
 					if (screenWelcome.visible) 
 						screenWelcome.onTapTabControllerControlChange(event.value as AbstractVO);
